@@ -42,7 +42,7 @@ public class BannerAds : MonoBehaviour
         }
 
         // Create a 320x50 banner at top of the screen
-        _bannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.BottomLeft);
+        _bannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.Bottom);
     }
 
     /// <summary>

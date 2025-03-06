@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class IntersitialAds : MonoBehaviour
 {
+    Bird bird;
     private InterstitialAd _interstitialAd;
 
     // AdMob Interstitial Ad Unit ID
@@ -18,6 +19,7 @@ public class IntersitialAds : MonoBehaviour
 
     public void Start()
     {
+        bird = FindAnyObjectByType<Bird>();
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(initStatus =>
         {
@@ -76,6 +78,7 @@ public class IntersitialAds : MonoBehaviour
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
+            bird.RestartGame();
         }
     }
 
@@ -88,12 +91,14 @@ public class IntersitialAds : MonoBehaviour
         {
             Debug.Log("Interstitial ad closed.");
             LoadInterstitialAd(); // Reload the ad for the next time
+            bird.RestartGame();
         };
 
         interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
         {
             Debug.LogError("Interstitial ad failed to open: " + error);
             LoadInterstitialAd(); // Reload ad in case of failure
+            bird.RestartGame();
         };
     }
 
